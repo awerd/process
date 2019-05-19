@@ -1,0 +1,13 @@
+{
+    "name": "awerd/process",
+    "description": "Awesome State Machine Library",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Aleksandr Galchenkov",
+            "email": "galchenkov@gmail.com",
+            "role": "Developer"
+        }
+    ]
+}
