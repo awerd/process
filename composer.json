@@ -9,5 +9,8 @@
             "email": "galchenkov@gmail.com",
             "role": "Developer"
         }
-    ]
+    ],
+    "autoload": {
+        "psr-4": { "Awerd\\Process\\": "src/" }
+    }
 }
