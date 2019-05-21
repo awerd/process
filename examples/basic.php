@@ -9,8 +9,23 @@
     class DomainObject {
 
         public $state = 'initial';
+        public $total = 20;
 
     }
+
+
+    class WorkingCompleteTransition extends Transition {
+
+        public function canTransit(StateMachine $stateMachine): bool
+        {
+            /** @var DomainObject $object */
+            $object = $stateMachine->object;
+
+            return $object->total > 100;
+        }
+
+    }
+
 
     $object = new DomainObject();
 
@@ -31,17 +46,24 @@
         $stateMachine->addState($complete = new State('complete'));
 
         $stateMachine->addTransition($initialWorking = new Transition('initial-working', $initial, $working));
-        $stateMachine->addTransition($workingComplete = new Transition('working-complete', $working, $complete));
+        $stateMachine->addTransition($workingComplete = new WorkingCompleteTransition('working-complete', $working, $complete));
         $stateMachine->addTransition($completeWorking = new Transition('complete-working', $complete, $working));
 
         var_dump($stateMachine->getCurrentState()->name);
-
         var_dump($stateMachine->canTransit($initialWorking));
         var_dump($stateMachine->canTransit($workingComplete));
-
         var_dump($stateMachine->availableTransitions());
 
         $stateMachine->transit($initialWorking);
+
+        var_dump($stateMachine->getCurrentState()->name);
+        var_dump($stateMachine->canTransit($workingComplete));
+
+        $object->total = 200;
+
+        var_dump($stateMachine->canTransit($workingComplete));
+
+        $stateMachine->transit($workingComplete);
 
         var_dump($stateMachine->getCurrentState()->name);
 

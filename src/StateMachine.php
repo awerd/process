@@ -152,7 +152,10 @@ class StateMachine {
             return false;
         }
 
-        return true;
+        /** @var Transition $transition */
+        $transition = array_shift($existsTransitions);
+
+        return $transition->canTransit($this);
     }
 
 
@@ -165,6 +168,8 @@ class StateMachine {
     public function transit(Transition $transition, array $payload = []): StateMachine
     {
         if ($this->canTransit($transition)) {
+            $transition->transit($this);
+
             $this->setter->call($this, $this->object, $transition, $payload);
 
             return $this;

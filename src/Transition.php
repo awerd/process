@@ -18,4 +18,23 @@ class Transition {
         $this->payload = $payload;
     }
 
+
+    /**
+     * @param StateMachine $stateMachine
+     * @return bool
+     */
+    public function canTransit(StateMachine $stateMachine): bool
+    {
+        return true;
+    }
+
+
+    /**
+     * @param StateMachine $stateMachine
+     */
+    public function transit(StateMachine $stateMachine): void
+    {
+        // Change object properties if need...
+    }
+
 }
