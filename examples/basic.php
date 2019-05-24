@@ -52,7 +52,7 @@
         var_dump($stateMachine->getCurrentState()->name);
         var_dump($stateMachine->canTransit($initialWorking));
         var_dump($stateMachine->canTransit($workingComplete));
-        var_dump($stateMachine->availableTransitions());
+        var_dump($stateMachine->getAvailableTransitions());
 
         $stateMachine->transit($initialWorking);
 
