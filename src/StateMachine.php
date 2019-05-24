@@ -136,11 +136,13 @@ class StateMachine {
      * @return Transition
      * @throws Exception
      */
-    public function getAvailableTransitionByName(string $name): Transition
+    public function getAvailableTransitionByName(string $name): ?Transition
     {
-        return array_shift(array_filter($this->getAvailableTransitions(), function (Transition $transition) use ($name) {
+        $filteredTransitions = array_filter($this->getAvailableTransitions(), function (Transition $transition) use ($name) {
             return $transition->name === $name;
-        }));
+        });
+
+        return array_shift($filteredTransitions);
     }
 
 
